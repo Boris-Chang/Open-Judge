@@ -10,6 +10,7 @@
 样例输出
 8*/
 
+//m:apples,n:plates;
 #include<iostream>
 using namespace std;
 
@@ -43,3 +44,17 @@ int count(int m, int n)
 		return count(m, n - 1) + count(m - n, n);
 	}
 }
+/*
+思路：
+第一层的两种情况：
+1. 苹果数量<盘子数量
+假设每个盘子都只放一个苹果，至少有空盘。空盘子无意义，去掉空盘子。
+function(m,n) => function(m,m);
+2. 苹果数量>盘子数量
+该情况又可以分成两种情况：
+一：有空盘子
+既然有空盘子，那么至少存在一个空盘子，空盘子无意义，去掉。
+function(m,n) => function(m,n-1);
+二：无空盘子
+无空盘子，说明每个盘子至少放置一个苹果。所以每个盘子可以同时去掉一个苹果，该动作并不影响放置方法。
+function(m,n) => function(m-n,m);
